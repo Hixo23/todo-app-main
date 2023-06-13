@@ -8,7 +8,7 @@ function App() {
 
   return (
     <ThemeContext.Provider value={isDarkTheme}>
-      <main className={`'w-screen h-screen ${isDarkTheme ? 'bg-zinc-900 bg-[url(../public/bg-mobile-dark.jpg)] md:bg-[url(../public/bg-desktop-dark.jpg)]' : 'bg-gray-200 bg-[url(../public/bg-mobile-light.jpg)] md:bg-[url(../public/bg-desktop-light.jpg)]'}  bg-contain bg-no-repeat`}>
+      <main className={`'w-screen h-screen ${isDarkTheme ? 'bg-zinc-900 bg-[url(../public/bg-mobile-dark.jpg)] md:bg-[url(../public/bg-desktop-dark.jpg)]' : 'bg-gray-200 bg-[url(../public/bg-mobile-light.jpg)] md:bg-[url(../public/bg-desktop-light.jpg)]'}  bg-[length:100vw_300px] bg-no-repeat`}>
         <Navbar setDarkTheme={setIsDarkTheme} />
         <List />
       </main>
