@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, Dispatch, SetStateAction } from "react"
 
-export const useLocalStorage = (storageKey: string, fallbackState: any) => {
+type SetValue<T> = Dispatch<SetStateAction<T>>
+
+export function useLocalStorage<T>(storageKey: string, fallbackState: string | number | boolean | [] | object): [T, SetValue<T>]  {
     const [value, setValue] = useState(() => {
         let currentValue;
 
@@ -19,4 +21,4 @@ export const useLocalStorage = (storageKey: string, fallbackState: any) => {
     }, [value, storageKey])
 
     return [value, setValue]
-};
+}
