@@ -10,7 +10,7 @@ interface Props {
 export const Navbar = ({ setDarkTheme }: Props) => {
   const theme = useContext(ThemeContext);
   return (
-    <nav className="min-h-[120px] py-14 flex items-center justify-around px-8">
+    <nav className="min-h-[80px] md:py-14 flex items-center justify-around px-8">
       <h1 className="uppercase tracking-[0.5rem] font-semibold text-white text-4xl">
         Todo
       </h1>

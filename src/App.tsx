@@ -50,7 +50,7 @@ function App() {
         {provided => (
           <main
           ref={provided.innerRef} {...provided.droppableProps}
-          className={`'w-screen h-screen ${
+          className={`'w-screen min-h-screen ${
             isDarkTheme
               ? "bg-zinc-900 bg-[url(/bg-mobile-dark.jpg)] md:bg-[url(/bg-desktop-dark.jpg)]"
               : "bg-gray-200 bg-[url(/bg-mobile-light.jpg)] md:bg-[url(/bg-desktop-light.jpg)]"

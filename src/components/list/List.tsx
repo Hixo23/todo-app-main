@@ -45,8 +45,8 @@ export const List = () => {
 
 
   return (
-     <div className="flex flex-col w-screen items-center font-josefin">
-      <div className="">
+     <div className="flex flex-col w-screen items-center font-josefin overflow-hidden">
+      <div className="overflow-hidden">
         <input
           onKeyDown={(e) => handleEnter(e)}
           onChange={(e) => setTodoContent(e.target.value)}
@@ -60,7 +60,7 @@ export const List = () => {
         />
       </div>
       <ul
-        className={`md:w-[700px] min-w-[350px] max-h-[600px] mt-16 overflow-y-auto rounded-md ${
+        className={`md:w-[700px] min-w-[350px] max-h-[600px] mt-8 overflow-y-auto rounded-md ${
           theme
             ? "bg-slate-800 text-white"
             : "bg-gray-200 text-slate-800"
@@ -77,7 +77,7 @@ export const List = () => {
           );
         })}
       </ul>
-      <div className="md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 bg-slate-800 text-white text-left  mt-2">
+      <div className="md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 bg-slate-800 text-white text-left mb-24  mt-2">
         <button onClick={filterByAll}>All</button>
         <button onClick={filterByCompleted}>Completed</button>
         <button onClick={filterByActive}>Active</button>
