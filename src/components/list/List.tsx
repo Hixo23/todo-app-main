@@ -77,7 +77,7 @@ export const List = () => {
           );
         })}
       </ul>
-      <div className="md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 bg-slate-800 text-white text-left mb-24  mt-2">
+      <div className={`md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 text-left mb-24  mt-2 ${theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"}`}>
         <button onClick={filterByAll}>All</button>
         <button onClick={filterByCompleted}>Completed</button>
         <button onClick={filterByActive}>Active</button>
