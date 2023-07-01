@@ -7,6 +7,7 @@ import type { Todo } from '../../types/types';
 export const List = () => {
   const [todoContent, setTodoContent] = useState("");
   const {todos, setTodos} = useContext(todosContext)
+  const [displayedTodos, setDisplayedTodos] = useState<Todo[]>(todos)
   const theme = useContext(ThemeContext);
 
   const addTodo = () => {
@@ -29,6 +30,17 @@ export const List = () => {
 
   const toggleCompleted = (id: number) => {
     setTodos(todos.map(todo => todo.id === id ? {...todo, isCompleted: !todo.isCompleted } : todo))
+  }
+
+  const filterByAll = () => {
+    return setDisplayedTodos(todos);
+  }
+
+  const filterByCompleted = () => {
+    return setDisplayedTodos(todos.filter(todo => todo.isCompleted))
+  }
+  const filterByActive = () => {
+    return setDisplayedTodos(todos.filter(todo => !todo.isCompleted))
   }
 
 
@@ -54,7 +66,7 @@ export const List = () => {
             : "bg-gray-200 text-slate-800"
         }`}
       >
-        {todos.map((todo: Todo, index: number) => {
+        {displayedTodos.map((todo: Todo, index: number) => {
           return (
             <Item
               index={index}
@@ -65,6 +77,11 @@ export const List = () => {
           );
         })}
       </ul>
+      <div className="md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 bg-slate-800 text-white text-left  mt-2">
+        <button onClick={filterByAll}>All</button>
+        <button onClick={filterByCompleted}>Completed</button>
+        <button onClick={filterByActive}>Active</button>
+      </div>
     </div>
   );
 };
