@@ -54,10 +54,12 @@ export const List = () => {
             : "bg-gray-200 text-slate-800"
         }`}
       >
-        {todos.map((todo: Todo) => {
+        {todos.map((todo: Todo, index: number) => {
           return (
             <Item
+              index={index}
               {...todo}
+              key={todo.id}
               toggleCompleted={toggleCompleted}
             />
           );
