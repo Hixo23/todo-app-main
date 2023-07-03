@@ -1,9 +1,19 @@
 import { useContext, useState } from "react"
+<<<<<<< HEAD
+=======
+import type { Todo } from "../../types/types"
+import { todosContext } from "../../contexts/todosContext"
+>>>>>>> f511179d413d5d761c22de97543a962646ebd2ad
 import { ThemeContext } from "../../contexts/themeContext"
 
 export const EditModal = ({name, id, handleEdit}: { name: string, id: number, handleEdit: (id: number, todoContent: string ) => void}) => {
     const [todoContent, setTodoContent] = useState("")
     const themeIsDark = useContext(ThemeContext);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f511179d413d5d761c22de97543a962646ebd2ad
     return (
         <div className="fixed flex justify-center items-center w-screen h-screen bg-black/[0.7] top-0 left-0">
             <div className={`w-96  ${ themeIsDark ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"} flex  flex-col px-4 rounded-xl`}>
