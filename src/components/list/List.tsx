@@ -38,6 +38,10 @@ export const List = () => {
     );
   };
 
+  const deleteCompleted = () => {
+   return setTodos(todos.filter(todo => !todo.isCompleted));
+  }
+
   useEffect(() => {
     const handleFilter = () => {
       switch (filterStatus) {
@@ -98,7 +102,10 @@ export const List = () => {
           </button>
           <button onClick={() => setFilterStatus("active")}>Active</button>
         </div>
+        <div className={`flex gap-4 ${themeIsDark ? 'text-gray-500' : 'text-slate-800'}`}>
         <p>{todos.filter(todo => !todo.isCompleted).length} items left</p>
+        <button onClick={deleteCompleted}>Clear completed</button>
+        </div>
       </div>
     </div>
   );
