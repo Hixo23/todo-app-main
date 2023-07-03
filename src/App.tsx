@@ -35,7 +35,6 @@ function App() {
     );
 
     setTodos(items)
-      console.log(todos)
   } 
   return (
     <ThemeContext.Provider value={isDarkTheme}>
@@ -50,7 +49,7 @@ function App() {
         {provided => (
           <main
           ref={provided.innerRef} {...provided.droppableProps}
-          className={`'w-screen min-h-screen ${
+          className={`'min-w-screen min-h-screen overflow-hidden ${
             isDarkTheme
               ? "bg-zinc-900 bg-[url(/bg-mobile-dark.jpg)] md:bg-[url(/bg-desktop-dark.jpg)]"
               : "bg-gray-200 bg-[url(/bg-mobile-light.jpg)] md:bg-[url(/bg-desktop-light.jpg)]"

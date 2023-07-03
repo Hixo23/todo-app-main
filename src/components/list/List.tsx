@@ -1,13 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../contexts/themeContext";
 import { todosContext } from "../../contexts/todosContext";
 import { Item } from "./Item";
-import type { Todo } from '../../types/types';
+import type { Todo } from "../../types/types";
 
 export const List = () => {
   const [todoContent, setTodoContent] = useState("");
-  const {todos, setTodos} = useContext(todosContext)
-  const [displayedTodos, setDisplayedTodos] = useState<Todo[]>(todos)
+  const { todos, setTodos } = useContext(todosContext);
+  const [filterStatus, setFilterStatus] = useState("all")
+  const [filteredTodos, setFilteredTodos] = useState<Todo[] | null>(null)
   const theme = useContext(ThemeContext);
 
   const addTodo = () => {
@@ -27,25 +28,29 @@ export const List = () => {
       addTodo();
     }
   };
-
   const toggleCompleted = (id: number) => {
-    setTodos(todos.map(todo => todo.id === id ? {...todo, isCompleted: !todo.isCompleted } : todo))
+    setTodos(todos.map(todo => todo.id === id ? {...todo, isCompleted: !todo.isCompleted} : todo))
   }
-
-  const filterByAll = () => {
-    return setDisplayedTodos(todos);
-  }
-
-  const filterByCompleted = () => {
-    return setDisplayedTodos(todos.filter(todo => todo.isCompleted))
-  }
-  const filterByActive = () => {
-    return setDisplayedTodos(todos.filter(todo => !todo.isCompleted))
-  }
-
+  
+  useEffect(() => {
+    const handleFilter = () => {
+      switch(filterStatus) {
+        case 'active': {
+          return setFilteredTodos(todos.filter(todo => !todo.isCompleted))
+        }
+        case 'completed': {
+          return setFilteredTodos(todos.filter(todo => todo.isCompleted))
+        }
+        default: {
+          return setFilteredTodos(todos)
+        }
+      }
+    }
+    handleFilter()
+  }, [todos, filterStatus])
 
   return (
-     <div className="flex flex-col w-screen items-center font-josefin overflow-hidden">
+    <div className="flex flex-col w-screen items-center font-josefin">
       <div className="overflow-hidden">
         <input
           onKeyDown={(e) => handleEnter(e)}
@@ -60,13 +65,11 @@ export const List = () => {
         />
       </div>
       <ul
-        className={`md:w-[700px] min-w-[350px] max-h-[600px] mt-8 overflow-y-auto rounded-md ${
-          theme
-            ? "bg-slate-800 text-white"
-            : "bg-gray-200 text-slate-800"
+        className={`md:w-[700px] min-w-[350px]   rounded-md ${
+          theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
         }`}
       >
-        {displayedTodos.map((todo: Todo, index: number) => {
+        {filteredTodos?.map((todo: Todo, index: number) => {
           return (
             <Item
               index={index}
@@ -77,10 +80,14 @@ export const List = () => {
           );
         })}
       </ul>
-      <div className={`md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 text-left mb-24  mt-2 ${theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"}`}>
-        <button onClick={filterByAll}>All</button>
-        <button onClick={filterByCompleted}>Completed</button>
-        <button onClick={filterByActive}>Active</button>
+      <div
+        className={`md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 text-left mb-24  mt-2 ${
+          theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
+        }`}
+      >
+        <button onClick={() => setFilterStatus('all')}>All</button>
+        <button onClick={() => setFilterStatus('completed')}>Completed</button>
+        <button onClick={() => setFilterStatus('active')}>Active</button>
       </div>
     </div>
   );

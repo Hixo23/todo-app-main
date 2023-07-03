@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/themeContext";
 import { todosContext } from "../../contexts/todosContext";
-import { Draggable, DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
+import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 
 interface Todo {
   name: string;
@@ -20,20 +20,20 @@ export const Item = (props: Todo) => {
         return todo.id !== id;
       }
     );
-
     setTodos(newTodos);
   };
 
   const theme = useContext(ThemeContext);
   return (
+   <>
     <Draggable draggableId={props.id.toString()} index={props.index}>
      {(provided: DraggableProvided) => (
-       <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-2 flex items-center justify-between py-3 px-6  ${
+       <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-2 z-0 flex items-center justify-between py-3 px-6  ${
         theme ? "border-slate-700" : "border-gray-300"
       }`}>
         <span
           onClick={() => props.toggleCompleted(props.id)}
-          className={`${props.isCompleted && "line-through text-gray-400"}`}
+          className={`${props.isCompleted && "line-through text-gray-400 z-20"}`}
         >
           {props.name}
         </span>
@@ -43,5 +43,7 @@ export const Item = (props: Todo) => {
       </li>
      )}
     </Draggable>
+
+    </>
   );
 };
