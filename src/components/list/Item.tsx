@@ -26,6 +26,7 @@ export const Item = (props: Todo) => {
   };
 
   const handleEdit = (id: number, todoContent: string) => {
+    
     setModalIsOpen(false);
     return setTodos(todos.map(todo => todo.id === id ? {...todo, name: todoContent } : todo))
 }
@@ -49,7 +50,9 @@ export const Item = (props: Todo) => {
         <button onClick={() => handleDelete(props.id)}>
           <span className="text-red-500 text-2xl">x</span>
         </button>
-        <button onClick={() => setModalIsOpen(true)}>
+        <button onClick={() => {
+          if(props.isCompleted) return;
+          setModalIsOpen(true)}}>
         <i className="fa-solid fa-pen-to-square w-4 h-4"></i>
         </button>
         </div>
