@@ -96,11 +96,11 @@ export const List = () => {
         }`}
       >
         <div className="flex gap-4">
-          <button onClick={() => setFilterStatus("all")}>All</button>
-          <button onClick={() => setFilterStatus("completed")}>
+          <button className={`${filterStatus == "all" && "text-blue-400"}`} onClick={() => setFilterStatus("all")}>All</button>
+          <button className={`${filterStatus == "completed" && "text-blue-400"}`} onClick={() => setFilterStatus("completed")}>
             Completed
           </button>
-          <button onClick={() => setFilterStatus("active")}>Active</button>
+          <button className={`${filterStatus == "active" && "text-blue-400"}`} onClick={() => setFilterStatus("active")}>Active</button>
         </div>
         <div className={`flex gap-4 ${themeIsDark ? 'text-gray-500' : 'text-slate-800'}`}>
         <p>{todos.filter(todo => !todo.isCompleted).length} items left</p>
