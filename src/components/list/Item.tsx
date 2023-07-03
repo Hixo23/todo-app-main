@@ -28,14 +28,14 @@ export const Item = (props: Todo) => {
    <>
     <Draggable draggableId={props.id.toString()} index={props.index}>
      {(provided: DraggableProvided) => (
-       <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-2 z-0 flex items-center justify-between py-3 px-6  ${
+       <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-b z-0 flex items-center justify-between py-3 px-6  ${
         theme ? "border-slate-700" : "border-gray-300"
       }`}>
         <span
           onClick={() => props.toggleCompleted(props.id)}
           className={`${props.isCompleted && "line-through text-gray-400 z-20"}`}
         >
-          {props.name}
+          {props.index + 1}. {props.name}
         </span>
         <button onClick={() => handleDelete(props.id)}>
           <span className="text-red-500 text-2xl">x</span>

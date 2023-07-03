@@ -7,8 +7,10 @@ import type { Todo } from "../../types/types";
 export const List = () => {
   const [todoContent, setTodoContent] = useState("");
   const { todos, setTodos } = useContext(todosContext);
-  const [filterStatus, setFilterStatus] = useState("all")
-  const [filteredTodos, setFilteredTodos] = useState<Todo[] | null>(null)
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [filteredTodos, setFilteredTodos] = useState<Todo[]>([
+    { id: 0, isCompleted: false, name: "" },
+  ]);
   const theme = useContext(ThemeContext);
 
   const addTodo = () => {
@@ -29,25 +31,29 @@ export const List = () => {
     }
   };
   const toggleCompleted = (id: number) => {
-    setTodos(todos.map(todo => todo.id === id ? {...todo, isCompleted: !todo.isCompleted} : todo))
-  }
-  
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
+
   useEffect(() => {
     const handleFilter = () => {
-      switch(filterStatus) {
-        case 'active': {
-          return setFilteredTodos(todos.filter(todo => !todo.isCompleted))
+      switch (filterStatus) {
+        case "active": {
+          return setFilteredTodos(todos.filter((todo) => !todo.isCompleted));
         }
-        case 'completed': {
-          return setFilteredTodos(todos.filter(todo => todo.isCompleted))
+        case "completed": {
+          return setFilteredTodos(todos.filter((todo) => todo.isCompleted));
         }
         default: {
-          return setFilteredTodos(todos)
+          return setFilteredTodos(todos);
         }
       }
-    }
-    handleFilter()
-  }, [todos, filterStatus])
+    };
+    handleFilter();
+  }, [todos, filterStatus]);
 
   return (
     <div className="flex flex-col w-screen items-center font-josefin">
@@ -65,7 +71,7 @@ export const List = () => {
         />
       </div>
       <ul
-        className={`md:w-[700px] min-w-[350px]   rounded-md ${
+        className={`md:w-[700px] min-w-[350px] mt-8 rounded-md ${
           theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
         }`}
       >
@@ -81,13 +87,18 @@ export const List = () => {
         })}
       </ul>
       <div
-        className={`md:w-[700px] min-w-[350px] rounded-lg flex gap-3 mx-auto p-4 text-left mb-24  mt-2 ${
+        className={`md:w-[700px] min-w-[350px] rounded-b-lg flex justify-between mx-auto p-4 text-left mb-24 ${
           theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
         }`}
       >
-        <button onClick={() => setFilterStatus('all')}>All</button>
-        <button onClick={() => setFilterStatus('completed')}>Completed</button>
-        <button onClick={() => setFilterStatus('active')}>Active</button>
+        <div className="flex gap-4">
+          <button onClick={() => setFilterStatus("all")}>All</button>
+          <button onClick={() => setFilterStatus("completed")}>
+            Completed
+          </button>
+          <button onClick={() => setFilterStatus("active")}>Active</button>
+        </div>
+        <p>{todos.filter(todo => !todo.isCompleted).length} items left</p>
       </div>
     </div>
   );
