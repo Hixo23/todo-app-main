@@ -11,7 +11,7 @@ export const List = () => {
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>([
     { id: 0, isCompleted: false, name: "" },
   ]);
-  const theme = useContext(ThemeContext);
+  const themeIsDark = useContext(ThemeContext);
 
   const addTodo = () => {
     if (todoContent !== "") {
@@ -64,7 +64,7 @@ export const List = () => {
           value={todoContent}
           id="createTodo"
           className={` md:w-[700px] min-w-[350px] h-16 p-6 rounded ${
-            theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
+            themeIsDark ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
           } md:outline-none "`}
           placeholder="Create a new todo"
           type="text"
@@ -72,7 +72,7 @@ export const List = () => {
       </div>
       <ul
         className={`md:w-[700px] min-w-[350px] mt-8 rounded-md ${
-          theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
+          themeIsDark ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
         }`}
       >
         {filteredTodos?.map((todo: Todo, index: number) => {
@@ -88,7 +88,7 @@ export const List = () => {
       </ul>
       <div
         className={`md:w-[700px] min-w-[350px] rounded-b-lg flex justify-between mx-auto p-4 text-left mb-24 ${
-          theme ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
+          themeIsDark ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
         }`}
       >
         <div className="flex gap-4">
