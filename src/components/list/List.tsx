@@ -105,7 +105,7 @@ export const List = () => {
         </div>
         <div className={`flex gap-4 ${themeIsDark ? 'text-gray-500' : 'text-slate-800'}`}>
         <p>{todos.filter(todo => !todo.isCompleted).length} items left</p>
-        <button onClick={deleteCompleted}>Clear completed</button>
+        <button className="hover:text-blue-500 transition-colors duration-150" onClick={deleteCompleted}>Clear completed</button>
         </div>
       </div>
     </div>
