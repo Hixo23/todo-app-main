@@ -6,7 +6,7 @@ export const EditModal = ({name, id, handleEdit, error}: { name: string, id: num
     const themeIsDark = useContext(ThemeContext);
 
     return (
-        <div className="fixed flex justify-center items-center w-screen h-screen bg-black/[0.7] top-0 left-0">
+        <div className="fixed flex justify-center items-center w-screen h-screen bg-black/[0.9] z-20 top-0 left-0">
             <div className={`w-96  ${ themeIsDark ? "bg-slate-800 text-white" : "bg-gray-300 text-slate-800"} flex  flex-col px-4 rounded-xl`}>
                 <p className={`text-xl ${themeIsDark ? 'text-white': 'text-slate-800'} text-center mt-4`}>Edit Todo</p>
                <form className="flex flex-col justify-center pb-8 gap-5" action="">

@@ -35,8 +35,8 @@ export const Item = (props: Todo) => {
 
   const theme = useContext(ThemeContext);
   return (
-   <>
-      {modalIsOpen &&  <EditModal handleEdit={handleEdit} id={props.id} name={props.name} error={error} />}
+    <>
+    {modalIsOpen &&  <EditModal handleEdit={handleEdit} id={props.id} name={props.name} error={error} />}
     <Draggable draggableId={props.id.toString()} index={props.index}>
      {(provided: DraggableProvided) => (
        <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-b z-0 flex items-center justify-between py-3 px-6  ${
