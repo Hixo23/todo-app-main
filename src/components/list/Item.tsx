@@ -42,8 +42,10 @@ export const Item = (props: Todo) => {
        <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-b z-0 flex items-center justify-between py-3 px-6  ${
         theme ? "border-slate-700" : "border-gray-300"
       }`}>
+        <button onClick={() => props.toggleCompleted(props.id)} className={`h-8 w-8 rounded-full border border-indigo-500 ${props.isCompleted && "bg-blue-500 relative after:w-3 after:h-1 after:rotate-45 after:content-[''] after:bg-white after:absolute after:top-15 after:left-1 before:w-4 before:h-1 before:-rotate-45 before:content-[''] before:bg-white before:absolute before:top-[0.8rem] before:left-[0.6rem]"}`}>
+
+        </button>
         <span
-          onClick={() => props.toggleCompleted(props.id)}
           className={`${props.isCompleted && "line-through text-gray-400 z-20"}`}
         >
           {props.index + 1}. {props.name}
