@@ -15,6 +15,7 @@ interface Todo {
 export const Item = (props: Todo) => {
   const { todos, setTodos } = useContext(todosContext);
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [error, setError] = useState("");
 
   const handleDelete = (id: number) => {
     const newTodos = todos.filter(
@@ -26,15 +27,16 @@ export const Item = (props: Todo) => {
   };
 
   const handleEdit = (id: number, todoContent: string) => {
-    
+    if(todoContent.length < 1) return setError("Input can't be null")
     setModalIsOpen(false);
+    setError("")
     return setTodos(todos.map(todo => todo.id === id ? {...todo, name: todoContent } : todo))
 }
 
   const theme = useContext(ThemeContext);
   return (
    <>
-      {modalIsOpen &&  <EditModal handleEdit={handleEdit} id={props.id} name={props.name} />}
+      {modalIsOpen &&  <EditModal handleEdit={handleEdit} id={props.id} name={props.name} error={error} />}
     <Draggable draggableId={props.id.toString()} index={props.index}>
      {(provided: DraggableProvided) => (
        <li ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps} className={`border-b z-0 flex items-center justify-between py-3 px-6  ${
