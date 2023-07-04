@@ -14,6 +14,7 @@ export const List = () => {
   const themeIsDark = useContext(ThemeContext);
 
   const addTodo = () => {
+    if(todoContent.length > 40) return alert("Todo can't be longer than 40 characters");
     if (todoContent !== "") {
       const Todo: Todo = {
         name: todoContent,
@@ -67,7 +68,7 @@ export const List = () => {
           onChange={(e) => setTodoContent(e.target.value)}
           value={todoContent}
           id="createTodo"
-          className={` md:w-[700px] min-w-[350px] h-16 p-6 rounded ${
+          className={` md:w-[700px] min-w-[350px]  p-6 rounded ${
             themeIsDark ? "bg-slate-800 text-white" : "bg-gray-200 text-slate-800"
           } md:outline-none "`}
           placeholder="Create a new todo"
